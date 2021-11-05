@@ -1,5 +1,4 @@
 import React from 'react';
-import Counter from './components/Counter/Counter';
 
 import Profile from './components/social-profile/profile';
 import user from './data/user.json';
@@ -13,11 +12,16 @@ import friends from './data/friends.json';
 import TransactionHistory from './components/transaction-history/transactions';
 import transactions from './data/transactions.json';
 
+import Counter from './components/Counter/Counter';
+import Dropdown from './components/Dropdown/Dropdown';
+import ColorPicker from './components/ColorPicker/ColorPicker';
+
 import './App.css';
 
 function App() {
   return (
     <div className="App">
+      <Dropdown />
       <Profile
         name={user.name}
         tag={user.tag}
@@ -30,6 +34,7 @@ function App() {
       <FriendList friends={friends} />
       <TransactionHistory items={transactions} />
       <Counter initialValue={10} />
+      <ColorPicker />
     </div>
   );
 }

@@ -1,8 +1,8 @@
 {
-  "name": "goit-react-hw-01-components",
+  "name": "goit-react-lessons",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://JKnoroz.github.io/goit-react-hw-01-components",
+  "homepage": "https://JKnoroz.github.io/goit-react-lessons",
   "dependencies": {
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
