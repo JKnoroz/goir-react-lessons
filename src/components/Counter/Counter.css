@@ -1,0 +1,11 @@
+button {
+  margin: 20px;
+  background-color: cadetblue;
+  color: aliceblue;
+  padding: 15px;
+}
+
+.Counter {
+  margin: 30px;
+  font-weight: 700;
+}

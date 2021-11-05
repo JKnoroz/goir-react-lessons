@@ -1,3 +1,6 @@
+import React from 'react';
+import Counter from './components/Counter/Counter';
+
 import Profile from './components/social-profile/profile';
 import user from './data/user.json';
 
@@ -26,6 +29,7 @@ function App() {
       <Statistics stats={statisticalData} />
       <FriendList friends={friends} />
       <TransactionHistory items={transactions} />
+      <Counter initialValue={10} />
     </div>
   );
 }
