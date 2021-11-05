@@ -1,0 +1,24 @@
+.transactionHistory {
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  border: 1px solid grey;
+  padding: 20px;
+}
+
+.tableRow {
+  display: flex;
+}
+
+.tableCell {
+  width: 33%;
+  padding: 10px;
+  text-align: left;
+}
+
+.head {
+  background-color: gainsboro;
+}
