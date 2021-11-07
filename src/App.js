@@ -17,6 +17,7 @@ import Dropdown from './components/Dropdown/Dropdown';
 import ColorPicker from './components/ColorPicker/ColorPicker';
 
 import TodoList from './components/TodoList';
+import initialTodos from './components/TodoList/todos.json';
 
 import './App.css';
 
@@ -31,14 +32,23 @@ const colorPickerOptions = [
 
 class App extends Component {
   state = {
-    todos: [
-      { id: 'id-1', text: 'Выучить основы React', completed: true },
-      { id: 'id-2', text: 'Разобраться с React Router', completed: false },
-      { id: 'id-3', text: 'Пережить Redux', completed: false },
-    ],
+    todos: initialTodos,
   };
+
+  deleteTodo = todoId => {
+    this.setState(prevState => ({
+      todos: prevState.todos.filter(todo => todo.id !== todoId),
+    }));
+  };
+
   render() {
     const { todos } = this.state;
+    const totalTodoCount = todos.length;
+    const completedTodoCount = todos.reduce(
+      (total, todo) => (todo.completed ? total + 1 : total),
+      0,
+    );
+
     return (
       <div className="App">
         <Dropdown />
@@ -55,7 +65,17 @@ class App extends Component {
         <TransactionHistory items={transactions} />
         <Counter initialValue={10} />
         <ColorPicker options={colorPickerOptions} />
-        <TodoList todos={todos} />
+        <div className="todoContainer">
+          <span>To do list</span>
+          <TodoList todos={todos} onDeleteTodo={this.deleteTodo} />
+
+          <span className="TodoList__count">
+            Total amount todo: {totalTodoCount}
+          </span>
+          <span className="TodoList__count">
+            Amount done: {completedTodoCount}
+          </span>
+        </div>
       </div>
     );
   }

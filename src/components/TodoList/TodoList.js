@@ -1,10 +1,12 @@
 import React from 'react';
+import './TodoList.css';
 
-const TodoList = ({ todos }) => (
-  <ul>
+const TodoList = ({ todos, onDeleteTodo }) => (
+  <ul className="TodoList">
     {todos.map(({ id, text }) => (
-      <li key={id}>
-        <p>{text}</p>
+      <li className="TodoList__item" key={id}>
+        <p className="TodoList__text">{text}</p>
+        <button onClick={() => onDeleteTodo(id)}>Delete</button>
       </li>
     ))}
   </ul>
