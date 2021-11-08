@@ -19,6 +19,8 @@ import ColorPicker from './components/ColorPicker/ColorPicker';
 import TodoList from './components/TodoList';
 import initialTodos from './components/TodoList/todos.json';
 
+import Form from './components/Form/Form';
+
 import './App.css';
 
 const colorPickerOptions = [
@@ -39,6 +41,10 @@ class App extends Component {
     this.setState(prevState => ({
       todos: prevState.todos.filter(todo => todo.id !== todoId),
     }));
+  };
+
+  formSubmitHandler = data => {
+    console.log(data);
   };
 
   render() {
@@ -76,6 +82,7 @@ class App extends Component {
             Amount done: {completedTodoCount}
           </span>
         </div>
+        <Form onSubmit={this.formSubmitHandler} />
       </div>
     );
   }
