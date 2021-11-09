@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import shortid from 'shortid';
 
 import Profile from './components/social-profile/profile';
 import user from './data/user.json';
@@ -18,6 +19,7 @@ import ColorPicker from './components/ColorPicker/ColorPicker';
 
 import TodoList from './components/TodoList';
 import initialTodos from './components/TodoList/todos.json';
+import TodoEditor from './components/TodoList/TodoEditor';
 
 import Form from './components/Form/Form';
 
@@ -37,9 +39,34 @@ class App extends Component {
     todos: initialTodos,
   };
 
+  addTodo = text => {
+    const todo = {
+      id: shortid.generate(),
+      text,
+      completed: false,
+    };
+    this.setState(prevState => ({
+      todos: [todo, ...prevState.todos],
+    }));
+  };
+
   deleteTodo = todoId => {
     this.setState(prevState => ({
       todos: prevState.todos.filter(todo => todo.id !== todoId),
+    }));
+  };
+
+  toggleCompleted = todoId => {
+    this.setState(prevState => ({
+      todos: prevState.todos.map(todo => {
+        if (todo.id === todoId) {
+          return {
+            ...todo,
+            completed: !todo.completed,
+          };
+        }
+        return todo;
+      }),
     }));
   };
 
@@ -73,7 +100,12 @@ class App extends Component {
         <ColorPicker options={colorPickerOptions} />
         <div className="todoContainer">
           <span>To do list</span>
-          <TodoList todos={todos} onDeleteTodo={this.deleteTodo} />
+          <TodoEditor onSubmit={this.addTodo} />
+          <TodoList
+            todos={todos}
+            onDeleteTodo={this.deleteTodo}
+            onToggleCompleted={this.toggleCompleted}
+          />
 
           <span className="TodoList__count">
             Total amount todo: {totalTodoCount}
