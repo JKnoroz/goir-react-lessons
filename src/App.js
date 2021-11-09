@@ -80,18 +80,27 @@ class App extends Component {
     console.log(data);
   };
 
-  render() {
-    const { todos, filter } = this.state;
-    const totalTodoCount = todos.length;
-    const completedTodoCount = todos.reduce(
+  getCompletedTodoCount = () => {
+    const { todos } = this.state;
+    return todos.reduce(
       (total, todo) => (todo.completed ? total + 1 : total),
       0,
     );
+  };
 
-    const normalizedFilter = this.state.filter.toLowerCase();
-    const visibleTodos = this.state.todos.filter(todo =>
+  getVisibleTodos = () => {
+    const { filter, todos } = this.state;
+    const normalizedFilter = filter.toLowerCase();
+    return todos.filter(todo =>
       todo.text.toLowerCase().includes(normalizedFilter),
     );
+  };
+
+  render() {
+    const { todos, filter } = this.state;
+    const totalTodoCount = todos.length;
+    const completedTodoCount = this.getCompletedTodoCount();
+    const visibleTodos = this.getVisibleTodos();
 
     return (
       <div className="App">
