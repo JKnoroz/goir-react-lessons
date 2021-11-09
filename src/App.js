@@ -20,6 +20,7 @@ import ColorPicker from './components/ColorPicker/ColorPicker';
 import TodoList from './components/TodoList';
 import initialTodos from './components/TodoList/todos.json';
 import TodoEditor from './components/TodoList/TodoEditor';
+import Filter from './components/TodoList/Filter';
 
 import Form from './components/Form/Form';
 
@@ -37,6 +38,7 @@ const colorPickerOptions = [
 class App extends Component {
   state = {
     todos: initialTodos,
+    filter: '',
   };
 
   addTodo = text => {
@@ -45,8 +47,8 @@ class App extends Component {
       text,
       completed: false,
     };
-    this.setState(prevState => ({
-      todos: [todo, ...prevState.todos],
+    this.setState(({ todos }) => ({
+      todos: [todo, ...todos],
     }));
   };
 
@@ -70,16 +72,25 @@ class App extends Component {
     }));
   };
 
+  changeFilter = e => {
+    this.setState({ filter: e.currentTarget.value });
+  };
+
   formSubmitHandler = data => {
     console.log(data);
   };
 
   render() {
-    const { todos } = this.state;
+    const { todos, filter } = this.state;
     const totalTodoCount = todos.length;
     const completedTodoCount = todos.reduce(
       (total, todo) => (todo.completed ? total + 1 : total),
       0,
+    );
+
+    const normalizedFilter = this.state.filter.toLowerCase();
+    const visibleTodos = this.state.todos.filter(todo =>
+      todo.text.toLowerCase().includes(normalizedFilter),
     );
 
     return (
@@ -101,8 +112,9 @@ class App extends Component {
         <div className="todoContainer">
           <span>To do list</span>
           <TodoEditor onSubmit={this.addTodo} />
+          <Filter value={filter} onChange={this.changeFilter} />
           <TodoList
-            todos={todos}
+            todos={visibleTodos}
             onDeleteTodo={this.deleteTodo}
             onToggleCompleted={this.toggleCompleted}
           />
