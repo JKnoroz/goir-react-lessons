@@ -24,6 +24,8 @@ import Filter from './components/TodoList/Filter';
 
 import Form from './components/Form/Form';
 
+import Modal from './components/Modal';
+
 import './App.css';
 
 const colorPickerOptions = [
@@ -39,6 +41,13 @@ class App extends Component {
   state = {
     todos: initialTodos,
     filter: '',
+    showModal: false,
+  };
+
+  toggleModal = () => {
+    this.setState(({ showModal }) => ({
+      showModal: !showModal,
+    }));
   };
 
   addTodo = text => {
@@ -110,7 +119,7 @@ class App extends Component {
   }
 
   render() {
-    const { todos, filter } = this.state;
+    const { todos, filter, showModal } = this.state;
     const totalTodoCount = todos.length;
     const completedTodoCount = this.getCompletedTodoCount();
     const visibleTodos = this.getVisibleTodos();
@@ -149,6 +158,18 @@ class App extends Component {
           </span>
         </div>
         <Form onSubmit={this.formSubmitHandler} />
+        <button type="button" onClick={this.toggleModal}>
+          Open modal
+        </button>
+        {showModal && (
+          <Modal onClose={this.toggleModal}>
+            <h2>Modal window</h2>
+            <p>laalalala</p>
+            <button type="button" onClick={this.toggleModal}>
+              Close modal
+            </button>
+          </Modal>
+        )}
       </div>
     );
   }
