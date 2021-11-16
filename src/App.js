@@ -147,7 +147,7 @@ class App extends Component {
         <Counter initialValue={10} />
         <ColorPicker options={colorPickerOptions} />
         <div className="todoContainer">
-          <IconButton onClick={this.toggleModal}>
+          <IconButton onClick={this.toggleModal} aria-label="Add to do">
             <AddIcon width="40" height="40" fill="#fff" />
           </IconButton>
           <span>To do list</span>

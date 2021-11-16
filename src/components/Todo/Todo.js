@@ -12,7 +12,7 @@ const Todo = ({ text, completed, onToggleCompleted, onDeleteTodo }) => (
     />
     <p className="TodoList__text">{text}</p>
     {/* <button onClick={onDeleteTodo}>Delete</button> */}
-    <IconButton onClick={onDeleteTodo}>
+    <IconButton onClick={onDeleteTodo} aria-label="delete todo">
       <DeleteIcon width="32" height="32" fill="#fff" />
     </IconButton>
   </>
