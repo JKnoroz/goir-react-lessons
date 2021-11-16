@@ -25,6 +25,8 @@ import Filter from './components/TodoList/Filter';
 import Form from './components/Form/Form';
 
 import Modal from './components/Modal';
+import Clock from './components/Clock';
+import IconButton from './components/IconButton';
 
 import './App.css';
 
@@ -126,6 +128,7 @@ class App extends Component {
 
     return (
       <div className="App">
+        <Clock />
         <Dropdown />
         <Profile
           name={user.name}
