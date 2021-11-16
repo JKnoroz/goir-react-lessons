@@ -27,6 +27,7 @@ import Form from './components/Form/Form';
 import Modal from './components/Modal';
 import Clock from './components/Clock';
 import IconButton from './components/IconButton';
+import { ReactComponent as AddIcon } from './icons/add.svg';
 
 import './App.css';
 
@@ -61,6 +62,7 @@ class App extends Component {
     this.setState(({ todos }) => ({
       todos: [todo, ...todos],
     }));
+    this.toggleModal();
   };
 
   deleteTodo = todoId => {
@@ -137,6 +139,7 @@ class App extends Component {
           avatar={user.avatar}
           stats={user.stats}
         />
+
         <Statistics title="Upload stats" stats={statisticalData} />
         <Statistics stats={statisticalData} />
         <FriendList friends={friends} />
@@ -144,9 +147,13 @@ class App extends Component {
         <Counter initialValue={10} />
         <ColorPicker options={colorPickerOptions} />
         <div className="todoContainer">
+          <IconButton onClick={this.toggleModal}>
+            <AddIcon width="40" height="40" fill="#fff" />
+          </IconButton>
           <span>To do list</span>
-          <TodoEditor onSubmit={this.addTodo} />
+
           <Filter value={filter} onChange={this.changeFilter} />
+
           <TodoList
             todos={visibleTodos}
             onDeleteTodo={this.deleteTodo}
@@ -167,7 +174,7 @@ class App extends Component {
         {showModal && (
           <Modal onClose={this.toggleModal}>
             <h2>Modal window</h2>
-            <p>laalalala</p>
+            <TodoEditor onSubmit={this.addTodo} />
             <button type="button" onClick={this.toggleModal}>
               Close modal
             </button>
